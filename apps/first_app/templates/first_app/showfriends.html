@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Friends</title>
+</head>
+<body>
+    <div class="wrapper">
+        <p><a href="/logout">Logout</a></p>
+        <h3>Hello, {{ myself.first_name }}!</h3>
+        <h4>Here is the list of your friends:</h4>
+        <table>
+            <tr>
+                <th style="font-weight: bold">Alias</th>
+                <th style="font-weight: bold">Action</th>
+            </tr>
+            {%if not myfriends%}
+                <p>You don't have friends yet.</p>
+            {%endif%}
+
+            {%for myfriend in myfriends%}
+                <tr>
+                    <td>{{myfriend.alias}}</td>
+                    <td> <button> <a href="/users/{{myfriend.id}}">View Profile</a> </button> | <button> <a href="/users/remove/{{myfriend.id}}">Remove as Friend</a> </button> </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <br><br>
+
+        <h4>Other Users not on your friend's list:</h4>
+        <table>
+            <tr>
+                <th style="font-weight: bold">Alias</th>
+                <th style="font-weight: bold">Action</th>
+            </tr>
+            {%for notfriend in notfriends%}
+                <tr>
+                    <td><a href="/users/{{notfriend.id}}">{{notfriend.alias}}</a></td>
+                    <td>
+                        <form action="/users/add/{{notfriend.id}}" method="post">
+                        {% csrf_token %}
+                            <input type="submit" value="Add as Friend" >
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

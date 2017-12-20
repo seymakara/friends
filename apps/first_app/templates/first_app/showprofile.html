@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>{{user.alias}}</title>
+</head>
+<body>
+    <div>
+        <a href="/friends">Home</a> | <a href="/logout">Logout</a>
+        <h3>{{user.alias}}' Profile</h3>
+        <p><span style="font-weight: bold">Name :</span> {{user.first_name}}</p>
+        <p> <span style="font-weight: bold">Email :</span> {{user.email}}</p>
+    </div>
+
+</body>
+</html>

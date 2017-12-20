@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Login/Registration</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h3>Welcome!</h3>
+        <div id="register" class="infobox">
+            {% for message in messages %}
+                <p>{{ message.message }}</p>
+            {% endfor %}
+            <form class="" action="/register" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <legend><h3>Register</h3></legend>
+                    Name: <input type="text" name="first_name" value="">
+                    <br><br>
+                    Alias: <input type="text" name="alias" value="">
+                    <br><br>
+                    Email: <input type="text" name="email" value="">
+                    <br><br>
+                    Password: <input type="password" name="pw" value="">
+                    <br>
+                    <p>*Password should be at least 8 characters</p>
+                    Confirm Password: <input type="password" name="pw_confirm" value="">
+                    <br><br>
+                    Birthday: <input type="date" name="bday">
+                    <input type="submit" name="submit" value="Register">
+                </fieldset>
+            </form>
+        </div>
+    
+        <div id="login" class="infobox">
+            <form class="" action="/login" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <legend><h3>Login</h3></legend>
+                    Email: <input type="text" name="email" value="">
+                    <br><br>
+                    Password: <input type="password" name="pw" value="">
+                    <br><br>
+                    <input type="submit" name="login" value="Login">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
